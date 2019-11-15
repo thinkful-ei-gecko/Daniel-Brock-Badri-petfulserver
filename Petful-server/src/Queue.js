@@ -53,7 +53,7 @@ function isEmpty(queue) {
 
 function display(queue) {
   let displayQueue = queue;
-  console.log(JSON.stringify(displayQueue));
+  return JSON.stringify(displayQueue)
 }
 
 module.exports = {
