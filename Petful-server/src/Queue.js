@@ -11,6 +11,19 @@ class Queue {
     this.last = null;
   }
 
+  getUserPlaceInLine(user) {
+    let currentPosition = this.first
+    let count = 0
+    while (currentPosition !== user) {
+      count ++;
+      if (currentPosition.value === user) {
+        return count
+      }
+      currentPosition = currentPosition.next
+    }
+    return 0
+  }
+
   enqueue(value) {
     const node = new _Node(value);
     if (this.first === null) {

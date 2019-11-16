@@ -37,8 +37,8 @@ app.get('/api/users', (req, res) => {
 app.post('/api/users', jsonBodyParser, (req, res) => {
   const { user } = req.body;
   usersList.enqueue(user);
-  const placeInLine = 0
-  //placeInLine = usersList.getUserPlaceInLine(user);
+  let placeInLine = 0
+  placeInLine = usersList.getUserPlaceInLine(user);
   res.status(200)
   .json( {user, placeInLine} )
   
