@@ -6,6 +6,9 @@ const { node_env } = require('./config');
 const { CLIENT_ORIGIN } = require('./config');
 const { dogs, cats, users } = require('./Data');
 const { peek } = require('./Queue');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('./config');
 
 const dogsList = dogs();
 const catsList = cats();
@@ -19,6 +22,29 @@ app.use(
     origin: CLIENT_ORIGIN,
   })
 );
+
+const AuthService = {
+  getUserWithUserName(db, username) {
+    return db('user')
+      .where({ username })
+      .first();
+  },
+  comparePasswords(password, hash) {
+    return bcrypt.compare(password, hash);
+  },
+  createJwt(subject, payload) {
+    return jwt.sign(payload, config.JWT_SECRET, {
+      subject,
+      expiresIn: config.JWT_EXPIRY,
+      algorithm: 'HS256',
+    });
+  },
+  verifyJwt(token) {
+    return jwt.verify(token, config.JWT_SECRET, {
+      algorithms: ['HS256'],
+    });
+  },
+};
 
 // app.use(function validateBearerToken(req, res, next) {
 //   const apiToken = process.env.API_TOKEN;
@@ -37,8 +63,12 @@ app.get('/api/users', (req, res) => {
 app.post('/api/users', jsonBodyParser, (req, res) => {
   const { user } = req.body;
   usersList.enqueue(user);
-  const placeInLine = 0;
-  //placeInLine = usersList.getUserPlaceInLine(user);
+  res.status(200).json({ user });
+});
+
+app.get('/api/position', jsonBodyParser, (req, res) => {
+  const { user } = req.body.id;
+  let placeInLine = usersList.getUserPlaceInLine(user);
   res.status(200).json({ user, placeInLine });
 });
 

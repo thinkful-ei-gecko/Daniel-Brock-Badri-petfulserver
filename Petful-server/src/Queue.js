@@ -43,6 +43,19 @@ function peek(queue) {
   return first;
 }
 
+function getUserPlaceInLine(user){
+  let currentPosition = this.first;
+  let count = 0;
+  while (currentPosition !== user) {
+    count ++;
+    if (currentPosition.value === user) {
+      return count;
+    }
+    currentPosition = currentPosition.next;
+  }
+  return 0;
+}
+
 function isEmpty(queue) {
   let first = queue.first;
   if (first === null) {
@@ -62,4 +75,5 @@ module.exports = {
   display,
   isEmpty,
   peek,
+  getUserPlaceInLine,
 };
