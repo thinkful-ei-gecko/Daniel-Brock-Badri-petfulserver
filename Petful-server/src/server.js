@@ -25,9 +25,7 @@ app.use(
 
 const AuthService = {
   getUserWithUserName(db, username) {
-    return db('user')
-      .where({ username })
-      .first();
+    return 'user'.where({ username }).first();
   },
   comparePasswords(password, hash) {
     return bcrypt.compare(password, hash);
@@ -62,6 +60,7 @@ app.get('/api/users', (req, res) => {
 
 app.post('/api/users', jsonBodyParser, (req, res) => {
   const { user } = req.body;
+  console.log(user);
   usersList.enqueue(user);
   res.status(200).json({ user });
 });
@@ -78,6 +77,7 @@ app.delete('/api/users', (req, res) => {
 });
 
 app.get('/api/cats', (req, res) => {
+  bcrypt.compare('test', 'dW5kZWZpbmVk').then(res => console.log(res));
   res.json(peek(catsList));
 });
 
