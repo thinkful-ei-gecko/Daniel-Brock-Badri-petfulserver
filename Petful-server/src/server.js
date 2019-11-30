@@ -23,30 +23,30 @@ app.use(
   })
 );
 
-const AuthService = {
-  getUserWithUserName(db, username) {
-    return 'user'.where({ username }).first();
-  },
-  comparePasswords(password, hash) {
-    return bcrypt.compare(password, hash);
-  },
-  createJwt(subject, payload) {
-    return jwt.sign(payload, config.JWT_SECRET, {
-      subject,
-      expiresIn: config.JWT_EXPIRY,
-      algorithm: 'HS256',
-    });
-  },
-  verifyJwt(token) {
-    return jwt.verify(token, config.JWT_SECRET, {
-      algorithms: ['HS256'],
-    });
-  },
-};
+// const AuthService = {
+//   getUserWithUserName(db, username) {
+//     return 'user'.where({ username }).first();
+//   },
+//   comparePasswords(password, hash) {
+//     return bcrypt.compare(password, hash);
+//   },
+//   createJwt(subject, payload) {
+//     return jwt.sign(payload, config.JWT_SECRET, {
+//       subject,
+//       expiresIn: config.JWT_EXPIRY,
+//       algorithm: 'HS256',
+//     });
+//   },
+//   verifyJwt(token) {
+//     return jwt.verify(token, config.JWT_SECRET, {
+//       algorithms: ['HS256'],
+//     });
+//   },
+// };
 
-app.get('/api/users', (req, res) => {
-  res.json(peek(usersList));
-});
+// app.get('/api/users', (req, res) => {
+//   res.json(peek(usersList));
+// });
 
 app.post('/api/users', jsonBodyParser, (req, res) => {
   const { user } = req.body;
@@ -54,11 +54,11 @@ app.post('/api/users', jsonBodyParser, (req, res) => {
   res.status(200).json({ user });
 });
 
-app.get('/api/position', jsonBodyParser, (req, res) => {
-  const { user } = req.body.id;
-  let placeInLine = usersList.getUserPlaceInLine(user);
-  res.status(200).json({ user, placeInLine });
-});
+// app.get('/api/position', jsonBodyParser, (req, res) => {
+//   const { user } = req.body.id;
+//   let placeInLine = usersList.getUserPlaceInLine(user);
+//   res.status(200).json({ user, placeInLine });
+// });
 
 app.get('/api/cats', (req, res) => {
   console.log(usersList.first);
