@@ -56,6 +56,16 @@ function getUserPlaceInLine(user){
   return 0;
 }
 
+function makeArrayFromQueue(list) {
+  let result = [];
+  let currNode = list.first;
+  while (currNode !== null) {
+    result.push(currNode.value)
+    currNode = currNode.next;
+  }
+  return result;
+}
+
 function isEmpty(queue) {
   let first = queue.first;
   if (first === null) {
@@ -76,4 +86,5 @@ module.exports = {
   isEmpty,
   peek,
   getUserPlaceInLine,
+  makeArrayFromQueue,
 };
