@@ -1,19 +1,20 @@
-#Petful API
+# Petful API
 
-Welcome to the Petful API! This project was completed by Daniel Nichols, Brock Boutwell, and Badri Tulsiram as part of Thinkful's Engineering Immersion Program. 
-##What is Petful? 
+Welcome to the Petful API! This project was completed by Daniel Nichols, Brock Boutwell, and Badri Tulsiram as part of Thinkful's Engineering Immersion Program.
+
+## What is Petful? 
 
 The Petful API is the backend for a pet adoption application that works based on a first-in, first-out approach.  Pets are allowed to be adopted in the order they arrive at the shelter, and potential adopters are served in the order they sign up for adoption. In this way, Petful makes a difficult decision easy for all pet lovers. How convenient!
 
-##How does it work? 
+## How does it work? 
 
 The Petful API makes use of a queue data structure to track pets and potential adopters. As pets and users are entered into the program, they are added to the end of the queue. When a customer chooses to adopt, their information is sent to the API, which then checks to see that it matches with the values at the front of the queue. If there is a match, the pet and the user are removed from the queue, and (of course) go on to have a happy life together. 
 
-##Technologies Used
+## Technologies Used
 
 This API was built using NodeJS and Express Router.
 
-##Using the API
+## Using the API
 
 The API makes use of four endpoints: 
 
@@ -102,7 +103,7 @@ Badri,
 Kelley
 ]</pre></code>
 
-##Thanks
+## Thanks
 
 The developers would like to thank the entire Thinkful team for their guidance throughout the course of this project. We would also like to thank you for your interest in using our work. We hope that you will enjoy using this API as much as we have enjoyed building it. 
 
