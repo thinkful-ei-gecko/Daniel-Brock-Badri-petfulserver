@@ -56,6 +56,29 @@ function peek(queue) {
   return first;
 }
 
+function getUserPlaceInLine(user){
+  let currentPosition = this.first;
+  let count = 0;
+  while (currentPosition !== user) {
+    count ++;
+    if (currentPosition.value === user) {
+      return count;
+    }
+    currentPosition = currentPosition.next;
+  }
+  return 0;
+}
+
+function makeArrayFromQueue(list) {
+  let result = [];
+  let currNode = list.first;
+  while (currNode !== null) {
+    result.push(currNode.value)
+    currNode = currNode.next;
+  }
+  return result;
+}
+
 function isEmpty(queue) {
   let first = queue.first;
   if (first === null) {
@@ -75,4 +98,6 @@ module.exports = {
   display,
   isEmpty,
   peek,
+  getUserPlaceInLine,
+  makeArrayFromQueue,
 };

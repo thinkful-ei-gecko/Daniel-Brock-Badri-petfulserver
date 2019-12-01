@@ -5,7 +5,10 @@ const helmet = require('helmet');
 const { node_env } = require('./config');
 const { CLIENT_ORIGIN } = require('./config');
 const { dogs, cats, users } = require('./Data');
-const { peek } = require('./Queue');
+const { peek, makeArrayFromQueue } = require('./Queue');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('./config');
 
 const dogsList = dogs();
 const catsList = cats();
@@ -20,41 +23,63 @@ app.use(
   })
 );
 
-// app.use(function validateBearerToken(req, res, next) {
-//   const apiToken = process.env.API_TOKEN;
-//   const authToken = req.get('Authorization');
+// const AuthService = {
+//   getUserWithUserName(db, username) {
+//     return 'user'.where({ username }).first();
+//   },
+//   comparePasswords(password, hash) {
+//     return bcrypt.compare(password, hash);
+//   },
+//   createJwt(subject, payload) {
+//     return jwt.sign(payload, config.JWT_SECRET, {
+//       subject,
+//       expiresIn: config.JWT_EXPIRY,
+//       algorithm: 'HS256',
+//     });
+//   },
+//   verifyJwt(token) {
+//     return jwt.verify(token, config.JWT_SECRET, {
+//       algorithms: ['HS256'],
+//     });
+//   },
+// };
 
-//   if (!authToken || authToken.split(' ')[1] !== apiToken) {
-//     return res.status(401).json({ error: 'Unauthorized Request' });
-//   }
-//   next();
+// app.get('/api/users', (req, res) => {
+//   res.json(peek(usersList));
 // });
-
-app.get('/api/users', (req, res) => {
-  res.json(peek(usersList));
-});
 
 app.post('/api/users', jsonBodyParser, (req, res) => {
   const { user } = req.body;
   usersList.enqueue(user);
+<<<<<<< HEAD
   let placeInLine = 0
   placeInLine = usersList.getUserPlaceInLine(user);
   res.status(200)
   .json( {user, placeInLine} )
   
+=======
+  res.status(200).json({ user });
+>>>>>>> 3142dae43b2eb7c04f987aa268fdebdd074684d5
 });
 
-app.delete('/api/users', (req, res) => {
-  usersList.dequeue();
-  res.status(204).end();
-});
+// app.get('/api/position', jsonBodyParser, (req, res) => {
+//   const { user } = req.body.id;
+//   let placeInLine = usersList.getUserPlaceInLine(user);
+//   res.status(200).json({ user, placeInLine });
+// });
 
 app.get('/api/cats', (req, res) => {
+  console.log(usersList.first);
   res.json(peek(catsList));
 });
 
-app.delete('/api/cats', (req, res) => {
+app.delete('/api/cats', jsonBodyParser, (req, res) => {
+  let name = req.user.name;
+  if (name !== usersList.first.value) {
+    return res.status(401).json('You must wait your turn!');
+  }
   catsList.dequeue();
+  usersList.dequeue();
   res.status(204).end();
 });
 
@@ -62,11 +87,20 @@ app.get('/api/dogs', (req, res) => {
   res.json(peek(dogsList));
 });
 
-app.delete('/api/dogs', (req, res) => {
+app.delete('/api/dogs', jsonBodyParser, (req, res) => {
+  let name = req.headers.authorization;
+  if (name !== usersList.first.value) {
+    return res.status(401).json({ error: 'You must wait your turn!' });
+  }
   dogsList.dequeue();
+  usersList.dequeue();
   res.status(204).end();
 });
 
+app.get('/api/queue', (req, res) => {
+  let list = makeArrayFromQueue(usersList);
+  res.status(200).send(list);
+});
 // Catch-all 404
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
