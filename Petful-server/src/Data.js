@@ -14,6 +14,7 @@ function users() {
 function dogs() {
   const dogs = new Queue();
   dogs.enqueue({
+    id: 1,
     imageURL:
       'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
     imageDescription:
@@ -25,6 +26,7 @@ function dogs() {
     story: 'Owner Passed away',
   });
   dogs.enqueue({
+    id: 2,
     imageURL:
       'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
     imageDescription:
@@ -36,6 +38,7 @@ function dogs() {
     story: 'Owner Passed away',
   });
   dogs.enqueue({
+    id: 3,
     imageURL:
       'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
     imageDescription:
@@ -47,6 +50,7 @@ function dogs() {
     story: 'Owner Passed away',
   });
   dogs.enqueue({
+    id: 4,
     imageURL:
       'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
     imageDescription:
@@ -64,6 +68,7 @@ function dogs() {
 function cats() {
   const cats = new Queue();
   cats.enqueue({
+    id: 1,
     imageURL:
       'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
     imageDescription:
@@ -75,6 +80,7 @@ function cats() {
     story: 'Owner Passed away',
   });
   cats.enqueue({
+    id: 2,
     imageURL:
       'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
     imageDescription:
@@ -86,6 +92,7 @@ function cats() {
     story: 'Owner Passed away',
   });
   cats.enqueue({
+    id: 3,
     imageURL:
       'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
     imageDescription:
