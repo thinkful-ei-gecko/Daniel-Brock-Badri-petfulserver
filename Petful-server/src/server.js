@@ -38,8 +38,8 @@ app.get('/api/queue', (req, res) => {
 
 //Returns the cats queue as an  object
 app.get('/api/cats', (req, res) => {
-  let catsQueue = makeArrayFromQueue(catsList)
-  res.status(200).send(catsQueue)
+  let catsQueue = makeArrayFromQueue(catsList);
+  res.status(200).send(catsQueue);
 });
 
 //If name passed in request matches the value in the queue,
@@ -56,8 +56,8 @@ app.delete('/api/cats', jsonBodyParser, (req, res) => {
 
 //Returns the dog queue as an object
 app.get('/api/dogs', (req, res) => {
-  let dogsQueue = makeArrayFromQueue(dogsList)
-  res.status(200).send(dogsQueue)
+  let dogsQueue = makeArrayFromQueue(dogsList);
+  res.status(200).send(dogsQueue);
 });
 
 //If name passed in request matches the value in the queue,
