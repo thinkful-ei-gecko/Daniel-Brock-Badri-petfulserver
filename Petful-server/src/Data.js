@@ -2,11 +2,11 @@ const { Queue } = require('./Queue');
 
 function users() {
   const userQ = new Queue();
-  userQ.enqueue('Daniel');
-  userQ.enqueue('Badri');
-  userQ.enqueue('Brock');
-  userQ.enqueue('Phoebe');
-  userQ.enqueue('Kevin');
+  // userQ.enqueue('Daniel');
+  // userQ.enqueue('Badri');
+  // userQ.enqueue('Brock');
+  // userQ.enqueue('Phoebe');
+  // userQ.enqueue('Kevin');
 
   return userQ;
 }
